@@ -1,23 +1,3 @@
-# Copyright (c) 2022 @ FBK - Fondazione Bruno Kessler
-# Author: Roberto Doriguzzi-Corin
-# Project: LUCID: A Practical, Lightweight Deep Learning Solution for DDoS Attack Detection
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-#Sample commands
-# Training: python3 lucid_cnn.py --train ./sample-dataset/  --epochs 100 -cv 5
-# Testing: python3  lucid_cnn.py --predict ./sample-dataset/ --model ./sample-dataset/10t-10n-SYN2020-LUCID.h5
-
 import tensorflow as tf
 import numpy as np
 import random as rn
@@ -25,7 +5,6 @@ import os
 import csv
 import pprint
 from util_functions import *
-# Seed Random Numbers
 os.environ['PYTHONHASHSEED']=str(SEED)
 np.random.seed(SEED)
 rn.seed(SEED)
@@ -166,15 +145,11 @@ def main(argv):
             # With K-Fold cross-validation, the validation set is only used for early stopping
             rnd_search_cv.fit(X_train, Y_train, epochs=args.epochs, validation_data=(X_val, Y_val), callbacks=[es, mc])
 
-            # With refit=True (default) GridSearchCV refits the model on the whole training set (no folds) with the best
-            # hyper-parameters and makes the resulting model available as rnd_search_cv.best_estimator_.model
             best_model = rnd_search_cv.best_estimator_.model
 
             # We overwrite the checkpoint models with the one trained on the whole training set (not only k-1 folds)
             best_model.save(best_model_filename + '.h5')
 
-            # Alternatively, to save time, one could set refit=False and load the best model from the filesystem to test its performance
-            #best_model = load_model(best_model_filename + '.h5')
 
             Y_pred_val = (best_model.predict(X_val) > 0.5)
             Y_true_val = Y_val.reshape((Y_val.shape[0], 1))
@@ -219,7 +194,6 @@ def main(argv):
             model_name_string = model_filename.split(filename_prefix)[1].strip().split('.')[0].strip()
             model = load_model(model_path)
 
-            # warming up the model (necessary for the GPU)
             warm_up_file = dataset_filelist[0]
             filename = warm_up_file.split('/')[-1].strip()
             if filename_prefix in filename:
@@ -271,7 +245,6 @@ def main(argv):
         # load the labels, if available
         labels = parse_labels(args.dataset_type, args.attack_net, args.victim_net)
 
-        # do not forget command sudo ./jetson_clocks.sh on the TX2 board before testing
         if args.model is not None and args.model.endswith('.h5'):
             model_path = args.model
         else:

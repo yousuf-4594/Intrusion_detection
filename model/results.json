@@ -1,1 +1,1 @@
-{"Model": "DOS2019-LUCID", "Time": "0.024", "Packets": 14, "Samples": 4, "DDOS%": "0.000", "Accuracy": "1.0000", "F1Score": "0.0000", "TPR": "00nan", "FPR": "0.0000", "TNR": "1.0000", "FNR": "00nan", "Source": "enp0s3"}
+{"Model": "DOS2019-LUCID", "Time": "0.050", "Packets": 930, "Samples": 930, "DDOS%": "1.000", "Accuracy": "1.0000", "F1Score": "1.0000", "TPR": "1.0000", "FPR": "00nan", "TNR": "00nan", "FNR": "0.0000", "Source": "enp0s3"}
