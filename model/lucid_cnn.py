@@ -336,6 +336,10 @@ def report_results(Y_true, Y_pred, packets, model_name, data_source, prediction_
                'TPR': "N/A", 'FPR': "N/A", 'TNR': "N/A", 'FNR': "N/A", 'Source': data_source}
     pprint.pprint(row, sort_dicts=False)
     writer.writerow(row)
+    import json
+    file_path = "results.json"
+    with open(file_path, "w") as file:
+        json.dump(row, file)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
