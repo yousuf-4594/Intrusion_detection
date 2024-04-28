@@ -19,7 +19,6 @@ import h5py
 import glob
 from collections import OrderedDict
 
-
 SEED = 1
 MAX_FLOW_LEN = 100 # number of packets
 TIME_WINDOW = 10
@@ -125,5 +124,3 @@ def padding(X,max_flow_len):
                               constant_values=(0, 0))  # padding
         padded_X.append(padded_sample)
     return padded_X
-
-

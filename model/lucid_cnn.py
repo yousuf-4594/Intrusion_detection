@@ -334,7 +334,7 @@ def report_results(Y_true, Y_pred, packets, model_name, data_source, prediction_
         row = {'Model': model_name, 'Time': '{:04.3f}'.format(prediction_time), 'Packets': packets,
                'Samples': Y_pred.shape[0], 'DDOS%': ddos_rate, 'Accuracy': "N/A", 'F1Score': "N/A",
                'TPR': "N/A", 'FPR': "N/A", 'TNR': "N/A", 'FNR': "N/A", 'Source': data_source}
-    pprint.pprint(row, sort_dicts=False)
+    #pprint.pprint(row, sort_dicts=False)
     writer.writerow(row)
     import json
     file_path = "results.json"
